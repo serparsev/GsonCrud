@@ -11,7 +11,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.netmind.dao.contracts.StudentDao;
+import com.netmind.business.StudentBlImpl;
+import com.netmind.business.contracts.StudentBl;
 import com.netmind.model.Student;
 
 class StudentDaoImplIntegrationTest {
@@ -35,7 +36,7 @@ class StudentDaoImplIntegrationTest {
 
 	@Test
 	void testAddToJsonFile() throws IOException {
-		StudentDao studentDao = new StudentDaoImpl();
+		StudentBl studentBl = new StudentBlImpl();
 
 		Student student = new Student();
 		student.setIdStudent(1);
@@ -44,7 +45,16 @@ class StudentDaoImplIntegrationTest {
 		student.setAge(45);
 		student.setDateOfBirth(LocalDate.parse("1975-04-10"));
 
-		studentDao.addToJsonFile(student);
+		studentBl.addJsonFile(student);
+
+		Student student1 = new Student();
+		student1.setIdStudent(1);
+		student1.setName("Pablo");
+		student1.setSurname("perez");
+		student1.setAge(30);
+		student1.setDateOfBirth(LocalDate.parse("1975-04-10"));
+
+		studentBl.addJsonFile(student1);
 		fail("Not yet implemented");
 	}
 

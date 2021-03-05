@@ -39,9 +39,7 @@ public class StudentBlImpl implements StudentBl {
 		student.setAge(calculateAge(student.getDateOfBirth()));
 
 		FileManagerDao.createFile(prop.getProperty("TxtFilename"));
-		FileManagerDao.createFile(prop.getProperty("JsonFilename"));
 		logger.info("txt file is created");
-		logger.info("json file is created");
 
 		return studentDao.addStudentToFile(student);
 	}
@@ -54,7 +52,12 @@ public class StudentBlImpl implements StudentBl {
 	@Override
 	public boolean addJsonFile(Student student) throws IOException {
 		// TODO Auto-generated method stub
-		return false;
+		StudentDao studentDao = new StudentDaoImpl();
+
+		FileManagerDao.createFile(prop.getProperty("JsonFilename"));
+		logger.info("json file is created");
+
+		return studentDao.addToJsonFile(student);
 	}
 
 }
