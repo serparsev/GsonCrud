@@ -22,13 +22,11 @@ public class StudentDaoImpl implements StudentDao {
 
 	private static ArrayList<Student> studentList = null;
 	static final Logger logger = Logger.getLogger(StudentDaoImpl.class);
-	static JSONArray studentJsonList = new JSONArray();
+	static JSONArray studentJsonList = null;
 
 	static {
 		studentList = new ArrayList<Student>();
-	}
-
-	static {
+		studentJsonList = new JSONArray();
 	}
 
 	static {
@@ -55,7 +53,7 @@ public class StudentDaoImpl implements StudentDao {
 	public boolean addStudentToFile(Student student) throws IOException {
 		logger.info("addStudentToFile method called");
 		try (FileWriter fileWriter = new FileWriter(
-				FileManagerDao.getFileName(), true);
+				FileManagerDao.getFileName("txt"), true);
 				BufferedWriter bufferWriter = new BufferedWriter(fileWriter)) {
 			bufferWriter.write(student.toTxtFile());
 			bufferWriter.write(System.lineSeparator());
@@ -83,7 +81,8 @@ public class StudentDaoImpl implements StudentDao {
 
 		studentJsonList.add(studentJson);
 
-		try (FileWriter file = new FileWriter(FileManagerDao.getFileName())) {
+		try (FileWriter file = new FileWriter(
+				FileManagerDao.getFileName("json"))) {
 			file.write(studentJsonList.toString());
 			file.flush();
 		} catch (IOException e) {
