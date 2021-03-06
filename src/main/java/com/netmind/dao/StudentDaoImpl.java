@@ -69,15 +69,8 @@ public class StudentDaoImpl implements StudentDao {
 	@Override
 	public boolean addToJsonFile(Student student) throws IOException {
 
-		JSONObject studentDetails = new JSONObject();
-		studentDetails.put("id", student.getIdStudent());
-		studentDetails.put("name", student.getName());
-		studentDetails.put("surname", student.getSurname());
-		studentDetails.put("dateOfBirth", student.getDateOfBirth().toString());
-		studentDetails.put("age", student.getAge());
-
 		JSONObject studentJson = new JSONObject();
-		studentJson.put("student", studentDetails);
+		studentJson.put("student", student.toJsonFile());
 
 		studentJsonList.add(studentJson);
 
