@@ -27,14 +27,12 @@ public class FileManagerDao {
 				System.out.println("File already exists.");
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	public static String getFileName(String type) {
 		file = fileType.get(type);
-
 		return file.getName();
 	}
 

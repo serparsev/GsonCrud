@@ -1,5 +1,7 @@
 package com.netmind.dao;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -51,32 +53,32 @@ class StudentDaoImplIntegrationTest {
 		student1.setAge(30);
 		student1.setDateOfBirth(LocalDate.parse("1975-04-10"));
 
-		studentBl.addJsonFile(student1);
+		studentBl.add(student1);
 
 	}
 
-//	@Test
-//	void testAddToJsonFile() throws IOException {
-//		StudentBl studentBl = new StudentBlImpl();
-//
-//		Student student = new Student();
-//		student.setIdStudent(1);
-//		student.setName("Pepe");
-//		student.setSurname("Soto");
-//		student.setAge(45);
-//		student.setDateOfBirth(LocalDate.parse("1975-04-10"));
-//
-//		studentBl.addJsonFile(student);
-//
-//		Student student1 = new Student();
-//		student1.setIdStudent(1);
-//		student1.setName("Pablo");
-//		student1.setSurname("perez");
-//		student1.setAge(30);
-//		student1.setDateOfBirth(LocalDate.parse("1975-04-10"));
-//
-//		studentBl.addJsonFile(student1);
-//		fail("Not yet implemented");
-//	}
+	@Test
+	void testAddToJsonFile() throws IOException {
+		StudentBl studentBl = new StudentBlImpl();
+
+		Student student = new Student();
+		student.setIdStudent(1);
+		student.setName("Pepe");
+		student.setSurname("Soto");
+		student.setAge(45);
+		student.setDateOfBirth(LocalDate.parse("1975-04-10"));
+
+		studentBl.addJsonFile(student);
+
+		Student student1 = new Student();
+		student1.setIdStudent(1);
+		student1.setName("Pablo");
+		student1.setSurname("perez");
+		student1.setAge(30);
+		student1.setDateOfBirth(LocalDate.parse("1975-04-10"));
+
+		studentBl.addJsonFile(student1);
+		fail("Not yet implemented");
+	}
 
 }
