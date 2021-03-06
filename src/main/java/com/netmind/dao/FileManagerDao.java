@@ -4,13 +4,21 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class FileManagerDao {
+public class FileManagerDao extends Thread {
 
 	public static File file = null;
 
 	private static HashMap<String, File> fileType = new HashMap<String, File>();
 
-	public static void createFile(String fileName) {
+	private String fileName;
+
+	public FileManagerDao(String fileName) {
+		super();
+		this.fileName = fileName;
+	}
+
+	@Override
+	public void run() {
 		file = new File(fileName);
 
 		try {

@@ -50,7 +50,7 @@ public class StudentDaoImpl implements StudentDao {
 	}
 
 	@Override
-	public boolean addStudentToFile(Student student) throws IOException {
+	public boolean addToTxtFile(Student student) throws IOException {
 		logger.info("addStudentToFile method called");
 		try (FileWriter fileWriter = new FileWriter(
 				FileManagerDao.getFileName("txt"), true);

@@ -13,7 +13,7 @@ import com.netmind.dao.FileManagerDao;
 import com.netmind.dao.StudentDaoImpl;
 import com.netmind.dao.contracts.StudentDao;
 
-public class StudentBlImpl implements StudentBl {
+public class StudentBlImplThread implements StudentBl {
 
 	static Logger logger = Logger.getLogger(StudentBlImplThread.class);
 
@@ -34,9 +34,10 @@ public class StudentBlImpl implements StudentBl {
 
 	public boolean addTxtFile(Student student) throws IOException {
 		StudentDao studentDao = new StudentDaoImpl();
-		FileManagerDao TxtFile = new FileManagerDao(Config.getTxtFileName());
 
-		TxtFile.start();
+		student.setAge(calculateAge(student.getDateOfBirth()));
+
+		FileManagerDao.createFile(Config.getTxtFileName());
 		logger.info(Config.getTxtText());
 
 		return studentDao.addToTxtFile(student);
@@ -44,10 +45,10 @@ public class StudentBlImpl implements StudentBl {
 
 	@Override
 	public boolean addJsonFile(Student student) throws IOException {
+		// TODO Auto-generated method stub
 		StudentDao studentDao = new StudentDaoImpl();
-		FileManagerDao JsonFile = new FileManagerDao(Config.getJsonFileName());
 
-		JsonFile.start();
+		FileManagerDao.createFile(Config.getJsonFileName());
 		logger.info(Config.getJsonText());
 
 		return studentDao.addToJsonFile(student);
