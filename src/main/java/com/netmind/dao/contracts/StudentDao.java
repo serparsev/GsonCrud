@@ -2,7 +2,7 @@ package com.netmind.dao.contracts;
 
 import java.io.IOException;
 
-import com.netmind.model.Student;
+import com.netmind.common.model.Student;
 
 public interface StudentDao {
 

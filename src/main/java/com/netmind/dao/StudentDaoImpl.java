@@ -12,8 +12,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.netmind.business.StudentBlImpl;
+import com.netmind.common.model.Student;
 import com.netmind.dao.contracts.StudentDao;
-import com.netmind.model.Student;
 
 public class StudentDaoImpl implements StudentDao {
 

@@ -2,7 +2,7 @@ package com.netmind.business.contracts;
 
 import java.io.IOException;
 
-import com.netmind.model.Student;
+import com.netmind.common.model.Student;
 
 public interface StudentBl {
 	public boolean addJsonFile(Student student) throws IOException;

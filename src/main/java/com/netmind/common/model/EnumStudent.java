@@ -1,4 +1,4 @@
-package com.netmind.model;
+package com.netmind.common.model;
 
 public enum EnumStudent {
 	ADD_STUDENT(1), OLDEST_STUDENT(2), EXIT(3);

@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import com.netmind.business.StudentBlImpl;
 import com.netmind.business.contracts.StudentBl;
-import com.netmind.model.Student;
+import com.netmind.common.model.Student;
 
 class StudentDaoImplIntegrationTest {
 

@@ -1,4 +1,4 @@
-package com.netmind.model;
+package com.netmind.common.model;
 
 import java.time.LocalDate;
 import java.util.UUID;

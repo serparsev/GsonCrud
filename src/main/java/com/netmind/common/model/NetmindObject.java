@@ -1,4 +1,4 @@
-package com.netmind.model;
+package com.netmind.common.model;
 
 import java.util.UUID;
 

@@ -9,10 +9,10 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 import com.netmind.business.contracts.StudentBl;
+import com.netmind.common.model.Student;
 import com.netmind.dao.FileManagerDao;
 import com.netmind.dao.StudentDaoImpl;
 import com.netmind.dao.contracts.StudentDao;
-import com.netmind.model.Student;
 
 public class StudentBlImpl implements StudentBl {
 
