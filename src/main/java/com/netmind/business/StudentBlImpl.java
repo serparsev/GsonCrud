@@ -15,7 +15,7 @@ import com.netmind.dao.contracts.StudentDao;
 
 public class StudentBlImpl implements StudentBl {
 
-	static Logger logger = Logger.getLogger(StudentBlImplThread.class);
+	static Logger logger = Logger.getLogger(StudentBlImpl.class);
 	StudentDao studentDao = new StudentDaoImpl();
 
 	@Override
