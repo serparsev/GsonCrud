@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import com.netmind.business.contracts.StudentBl;
 import com.netmind.common.model.Student;
+import com.netmind.common.util.Constants;
 import com.netmind.dao.FileManagerDao;
 import com.netmind.dao.StudentDaoImpl;
 import com.netmind.dao.contracts.StudentDao;
@@ -24,7 +25,7 @@ public class StudentBlImpl implements StudentBl {
 		prop = new Properties();
 		try {
 			input = StudentBlImpl.class
-					.getResourceAsStream("/config.properties");
+					.getResourceAsStream(Constants.PROPERTIES_FILE);
 			prop.load(input);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
@@ -38,8 +39,8 @@ public class StudentBlImpl implements StudentBl {
 
 		student.setAge(calculateAge(student.getDateOfBirth()));
 
-		FileManagerDao.createFile(prop.getProperty("TxtFilename"));
-		logger.info("txt file is created");
+		FileManagerDao.createFile(prop.getProperty(Constants.TXT_FILE_NAME));
+		logger.info(Constants.TXT_FILE_CREATED);
 
 		return studentDao.addStudentToFile(student);
 	}
@@ -54,8 +55,8 @@ public class StudentBlImpl implements StudentBl {
 		// TODO Auto-generated method stub
 		StudentDao studentDao = new StudentDaoImpl();
 
-		FileManagerDao.createFile(prop.getProperty("JsonFilename"));
-		logger.info("json file is created");
+		FileManagerDao.createFile(prop.getProperty(Constants.JSON_FILE_NAME));
+		logger.info(Constants.JSON_FILE_CREATED);
 
 		return studentDao.addToJsonFile(student);
 	}
