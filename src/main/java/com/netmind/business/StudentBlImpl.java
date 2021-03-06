@@ -16,6 +16,7 @@ import com.netmind.dao.contracts.StudentDao;
 public class StudentBlImpl implements StudentBl {
 
 	static Logger logger = Logger.getLogger(StudentBlImplThread.class);
+	StudentDao studentDao = new StudentDaoImpl();
 
 	@Override
 	public boolean add(Student student) throws IOException {
@@ -33,7 +34,6 @@ public class StudentBlImpl implements StudentBl {
 	}
 
 	public boolean addTxtFile(Student student) throws IOException {
-		StudentDao studentDao = new StudentDaoImpl();
 		FileManagerDao TxtFile = new FileManagerDao(Config.getTxtFileName());
 
 		TxtFile.start();
@@ -44,7 +44,6 @@ public class StudentBlImpl implements StudentBl {
 
 	@Override
 	public boolean addJsonFile(Student student) throws IOException {
-		StudentDao studentDao = new StudentDaoImpl();
 		FileManagerDao JsonFile = new FileManagerDao(Config.getJsonFileName());
 
 		JsonFile.start();
