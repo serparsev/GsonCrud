@@ -1,9 +1,8 @@
 package com.netmind.common.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
-
-import org.json.simple.JSONObject;
 
 public class Student extends NetmindObject {
 
@@ -99,21 +98,9 @@ public class Student extends NetmindObject {
 		builder.append(",");
 		builder.append(age);
 		builder.append(",");
-		builder.append(dateOfBirth);
+		builder.append(
+				dateOfBirth.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 		return builder.toString();
-	}
-
-	@SuppressWarnings("unchecked")
-	public JSONObject toJsonFile() {
-		JSONObject studentDetails = new JSONObject();
-
-		studentDetails.put("id", this.getIdStudent());
-		studentDetails.put("name", this.getName());
-		studentDetails.put("surname", this.getSurname());
-		studentDetails.put("dateOfBirth", this.getDateOfBirth().toString());
-		studentDetails.put("age", this.getAge());
-
-		return studentDetails;
 	}
 
 	@Override
@@ -166,4 +153,5 @@ public class Student extends NetmindObject {
 			return false;
 		return true;
 	}
+
 }
