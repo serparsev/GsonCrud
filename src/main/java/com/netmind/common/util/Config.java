@@ -10,7 +10,7 @@ import com.netmind.business.StudentBlImpl;
 
 public class Config {
 
-	static Logger logger = Logger.getLogger(Config.class);
+	static final Logger logger = Logger.getLogger(Config.class);
 	static Properties prop = null;
 	static InputStream input = null;
 
@@ -18,7 +18,7 @@ public class Config {
 		prop = new Properties();
 		try {
 			input = StudentBlImpl.class
-					.getResourceAsStream(Constants.PROPERTIES_FILE);
+					.getResourceAsStream("/config.properties");
 			prop.load(input);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
@@ -26,19 +26,19 @@ public class Config {
 		}
 	}
 
-	public static String getTxtFileName() {
-		return prop.getProperty(Constants.TXT_FILE_NAME);
-	}
-
 	public static String getJsonFileName() {
 		return prop.getProperty(Constants.JSON_FILE_NAME);
 	}
 
-	public static String getTxtText() {
-		return prop.getProperty(Constants.TXT_FILE_CREATED);
+	public static String getTxtFileName() {
+		return prop.getProperty(Constants.TXT_FILE_NAME);
 	}
 
-	public static String getJsonText() {
-		return prop.getProperty(Constants.JSON_FILE_CREATED);
+	public static String getTextTxtFileName() {
+		return prop.getProperty(Constants.TEXT_TXT_FILE_NAME);
+	}
+
+	public static String getTextJsonFileName() {
+		return prop.getProperty(Constants.TEXT_JSON_FILE_NAME);
 	}
 }

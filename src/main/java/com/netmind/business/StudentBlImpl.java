@@ -15,17 +15,34 @@ import com.netmind.dao.contracts.StudentDao;
 
 public class StudentBlImpl implements StudentBl {
 
-	static Logger logger = Logger.getLogger(StudentBlImpl.class);
-	StudentDao studentDao = new StudentDaoImpl();
+	static final Logger logger = Logger.getLogger(StudentBlImpl.class);
 
 	@Override
 	public boolean add(Student student) throws IOException {
+		StudentDao studentDao = new StudentDaoImpl();
+
 		student.setAge(calculateAge(student.getDateOfBirth()));
 
-		addTxtFile(student);
-		addJsonFile(student);
+		FileManagerDao fileManagerDaoTxtThread = new FileManagerDao(
+				Config.getTxtFileName());
+		FileManagerDao fileManagerDaoJsonThread = new FileManagerDao(
+				Config.getJsonFileName());
 
-		return true;
+		try {
+			fileManagerDaoTxtThread.start();
+			fileManagerDaoTxtThread.join();
+			fileManagerDaoJsonThread.start();
+			fileManagerDaoJsonThread.join();
+		} catch (InterruptedException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// FileManagerDao.createFile(Config.getJsonFileName());
+		// FileManagerDao.createFile(Config.getTxtFileName());
+		logger.info(Config.getTextTxtFileName());
+		logger.info(Config.getJsonFileName());
+
+		return studentDao.addStudentToFile(student);
 	}
 
 	private int calculateAge(LocalDate dateOfBirth) {
@@ -33,22 +50,11 @@ public class StudentBlImpl implements StudentBl {
 		return edad.getYears();
 	}
 
-	public boolean addTxtFile(Student student) throws IOException {
-		FileManagerDao TxtFile = new FileManagerDao(Config.getTxtFileName());
-
-		TxtFile.start();
-		logger.info(Config.getTxtText());
-
-		return studentDao.addToTxtFile(student);
-	}
-
 	@Override
-	public boolean addJsonFile(Student student) throws IOException {
-		FileManagerDao JsonFile = new FileManagerDao(Config.getJsonFileName());
-
-		JsonFile.start();
-		logger.info(Config.getJsonText());
-
+	public boolean addToJsonFile(Student student) throws IOException {
+		StudentDao studentDao = new StudentDaoImpl();
+		// TODO Auto-generated method stub
 		return studentDao.addToJsonFile(student);
 	}
+
 }

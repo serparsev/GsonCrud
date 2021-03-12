@@ -10,6 +10,34 @@ import org.jsoup.select.Elements;
 public class JsoupExample {
 
 	public static void main(String[] args) throws IOException {
+		// To print €
+		// It doesn't work when I execute java -jar from commandline
+		// or you can execute this command in cmd "chcp 1252"
+		// ProcessBuilder pb = new ProcessBuilder("cmd.exe", "/c", "chcp",
+		// "1252")
+		// .inheritIO();
+		// Process p = pb.start();
+		/*
+		 * try { p.waitFor(); } catch (InterruptedException e) {
+		 * e.printStackTrace(); }
+		 */
+
+		// String rawString = "Imprimiendo euros €";
+		/*
+		 * byte[] bytes = rawString.getBytes(StandardCharsets.UTF_8);
+		 * 
+		 * String utf8EncodedString = new String(bytes, StandardCharsets.UTF_8);
+		 * System.out.println(utf8EncodedString);
+		 */
+		System.out.println("Imprimiendo euros €");
+
+		/*
+		 * String rawString2 = "Imprimiendo euros €"; ByteBuffer buffer =
+		 * StandardCharsets.UTF_8.encode(rawString2);
+		 * 
+		 * String utf8EncodedString2 = StandardCharsets.UTF_8.decode(buffer)
+		 * .toString(); System.out.println(utf8EncodedString2);
+		 */
 
 		String url = "http://en.wikipedia.org/";
 		print("Fetching %s...", url);
