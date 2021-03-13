@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.reflect.Type;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -18,7 +17,6 @@ import org.apache.log4j.Logger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.netmind.common.model.LocalDateSerializer;
 import com.netmind.common.model.Student;
 import com.netmind.dao.contracts.StudentDao;
 
@@ -73,26 +71,7 @@ public class StudentDaoImpl implements StudentDao {
 		if (studentJsonList == null) {
 			studentJsonList = new ArrayList<Student>();
 		}
-
 		return studentJsonList;
-	}
-
-	public static String getJsonFile() {
-		StringBuilder serializedStudent = new StringBuilder();
-		try (BufferedReader buff = new BufferedReader(
-				new FileReader(FileManagerDao.getFileName("json")));) {
-			String line;
-			while ((line = buff.readLine()) != null)
-				serializedStudent.append(line.trim());
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return serializedStudent.toString();
 	}
 
 	@Override
@@ -101,7 +80,8 @@ public class StudentDaoImpl implements StudentDao {
 		Student oldStudent = null;
 
 		oldStudent = studentJsonList.stream()
-				.filter(s -> s.getUUId().equals(uuid)).findFirst().orElse(null);
+				.filter(student -> student.getUUId().equals(uuid)).findFirst()
+				.orElse(null);
 
 		if (oldStudent != null) {
 			oldStudent.setIdStudent(updatedStudent.getIdStudent());
@@ -122,7 +102,8 @@ public class StudentDaoImpl implements StudentDao {
 		Student removedStudent = null;
 
 		removedStudent = studentJsonList.stream()
-				.filter(s -> s.getUUId().equals(uuid)).findFirst().get();
+				.filter(student -> student.getUUId().equals(uuid)).findFirst()
+				.get();
 
 		if (removedStudent != null) {
 			studentJsonList.remove(removedStudent);
@@ -132,13 +113,29 @@ public class StudentDaoImpl implements StudentDao {
 		}
 	}
 
+	public static String getJsonFile() {
+		StringBuilder serializedStudent = new StringBuilder();
+		try (BufferedReader buff = new BufferedReader(
+				new FileReader(FileManagerDao.getFileName("json")));) {
+			String line;
+			while ((line = buff.readLine()) != null)
+				serializedStudent.append(line.trim());
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return serializedStudent.toString();
+	}
+
 	public boolean writeToJsonFile(List<Student> studentJsonList) {
 		try (Writer writer = new FileWriter(FileManagerDao.getFileName("json"),
 				false)) {
 
-			GsonBuilder gsonBuilder = new GsonBuilder();
-			gsonBuilder.registerTypeAdapter(LocalDate.class,
-					new LocalDateSerializer());
+//			GsonBuilder gsonBuilder = new GsonBuilder();
+//			gsonBuilder.registerTypeAdapter(LocalDate.class,
+//					new LocalDateSerializer());
 
 			Gson gson = new GsonBuilder()
 					.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")

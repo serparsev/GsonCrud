@@ -34,7 +34,6 @@ public class StudentConsole {
 					studentBl.add(student);
 					studentBl.addToJsonFile(student);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					System.out.println(e.getMessage());
 					e.printStackTrace();
 				}

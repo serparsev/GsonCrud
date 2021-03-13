@@ -33,12 +33,10 @@ public class StudentBlImpl implements StudentBl {
 			fileManagerDaoTxtThread.join();
 			fileManagerDaoJsonThread.start();
 			fileManagerDaoJsonThread.join();
-		} catch (InterruptedException e) { // TODO Auto-generated catch block
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
-		// FileManagerDao.createFile(Config.getJsonFileName());
-		// FileManagerDao.createFile(Config.getTxtFileName());
 		logger.info(Config.getTextTxtFileName());
 		logger.info(Config.getJsonFileName());
 
@@ -53,7 +51,6 @@ public class StudentBlImpl implements StudentBl {
 	@Override
 	public boolean addToJsonFile(Student student) throws IOException {
 		StudentDao studentDao = new StudentDaoImpl();
-		// TODO Auto-generated method stub
 		return studentDao.addToJsonFile(student);
 	}
 

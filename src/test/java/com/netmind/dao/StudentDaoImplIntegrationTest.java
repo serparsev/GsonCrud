@@ -29,17 +29,6 @@ public class StudentDaoImplIntegrationTest {
 
 		FileManagerDao.createFile(Config.getTxtFileName());
 		FileManagerDao.createFile(Config.getJsonFileName());
-		/*
-		 * You can do it multithreading FileManagerDao fileManagerDaoTxtThread =
-		 * new FileManagerDao( Config.getTxtFileName()); FileManagerDao
-		 * fileManagerDaoJsonThread = new FileManagerDao(
-		 * Config.getJsonFileName());
-		 * 
-		 * try { fileManagerDaoTxtThread.start();
-		 * fileManagerDaoTxtThread.join(); fileManagerDaoJsonThread.start();
-		 * fileManagerDaoJsonThread.join(); } catch (InterruptedException e) {
-		 * // TODO Auto-generated catch block e.printStackTrace(); }
-		 */
 
 		Student student = new Student();
 		student.setIdStudent(1);
