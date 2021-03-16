@@ -133,4 +133,74 @@ public class StudentDaoImplIntegrationTest {
 		assertTrue(studentDao.removeFromJsonFile(uuid) == true);
 	}
 
+	@Test
+	@Parameters({ "3, pepe, soto, 21, 26-02-2000",
+			"4, Mar, Biel, 21, 26-02-2000",
+			"5, Juan, Fernando, 21, 26-02-2000" })
+	public void testAddToTxtFile(Integer idStudent, String name, String surname,
+			Integer age, String date) throws IOException {
+
+		Student student = new Student();
+		student.setIdStudent(idStudent);
+		student.setName(name);
+		student.setSurname(surname);
+		student.setAge(age);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		LocalDate dateOfBirth = LocalDate.parse(date, formatter);
+		student.setDateOfBirth(dateOfBirth);
+
+		assertTrue(studentDao.addToTxtFile(student) == true);
+	}
+
+	@Test
+	public void testGetAllFromTxt() throws IOException {
+		assertTrue(studentDao.getAllFromTxt().size() > 0);
+	}
+
+	@Test
+	public void testUpdateTxtFile() throws IOException {
+		DateTimeFormatter formatter1 = DateTimeFormatter
+				.ofPattern("dd-MM-yyyy");
+
+		Student oldStudent = new Student();
+		oldStudent.setIdStudent(45);
+		oldStudent.setName("oldStudent");
+		oldStudent.setSurname("diaz");
+		oldStudent.setAge(20);
+		LocalDate dateOfBirth = LocalDate.parse("21-02-1999", formatter1);
+		oldStudent.setDateOfBirth(dateOfBirth);
+
+		UUID uuid = oldStudent.getUUId();
+		studentDao.addToTxtFile(oldStudent);
+
+		Student updatedStudent = new Student();
+		updatedStudent.setIdStudent(45);
+		updatedStudent.setName("UpdatedStudent");
+		updatedStudent.setSurname("updated");
+		updatedStudent.setAge(20);
+		LocalDate dateOfBirth2 = LocalDate.parse("21-02-1999", formatter1);
+		updatedStudent.setDateOfBirth(dateOfBirth2);
+
+		assertTrue(studentDao.updateTxtFile(uuid, updatedStudent) == true);
+	}
+
+	@Test
+	public void testRemoveTxtFile() throws IOException {
+		DateTimeFormatter formatter1 = DateTimeFormatter
+				.ofPattern("dd-MM-yyyy");
+
+		Student removeStudent = new Student();
+		removeStudent.setIdStudent(45);
+		removeStudent.setName("removeStudent");
+		removeStudent.setSurname("diaz");
+		removeStudent.setAge(20);
+		LocalDate dateOfBirth = LocalDate.parse("21-02-1999", formatter1);
+		removeStudent.setDateOfBirth(dateOfBirth);
+
+		UUID uuid = removeStudent.getUUId();
+		studentDao.addToTxtFile(removeStudent);
+
+		assertTrue(studentDao.removeFromTxtFile(uuid) == true);
+	}
+
 }
