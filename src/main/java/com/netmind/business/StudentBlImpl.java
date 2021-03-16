@@ -10,17 +10,21 @@ import com.netmind.business.contracts.StudentBl;
 import com.netmind.common.model.Student;
 import com.netmind.common.util.Config;
 import com.netmind.dao.FileManagerDao;
-import com.netmind.dao.StudentDaoImpl;
 import com.netmind.dao.contracts.StudentDao;
 
 public class StudentBlImpl implements StudentBl {
 
 	static final Logger logger = Logger.getLogger(StudentBlImpl.class);
+	private StudentDao studentDao;
+
+	// inyectable y mockable
+	public StudentBlImpl(StudentDao studentDao) {
+		this.studentDao = studentDao;
+
+	}
 
 	@Override
 	public boolean add(Student student) throws IOException {
-		StudentDao studentDao = new StudentDaoImpl();
-
 		student.setAge(calculateAge(student.getDateOfBirth()));
 
 		FileManagerDao fileManagerDaoTxtThread = new FileManagerDao(
@@ -37,10 +41,10 @@ public class StudentBlImpl implements StudentBl {
 			e.printStackTrace();
 		}
 
-		logger.info(Config.getTextTxtFileName());
+		logger.info(Config.getTextTxtFile());
 		logger.info(Config.getJsonFileName());
 
-		return studentDao.addStudentToFile(student);
+		return studentDao.addToTxtFile(student);
 	}
 
 	private int calculateAge(LocalDate dateOfBirth) {
@@ -50,7 +54,6 @@ public class StudentBlImpl implements StudentBl {
 
 	@Override
 	public boolean addToJsonFile(Student student) throws IOException {
-		StudentDao studentDao = new StudentDaoImpl();
 		return studentDao.addToJsonFile(student);
 	}
 

@@ -4,17 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.netmind.common.util.Constants;
+
 public class FileManagerDao extends Thread {
+
 	private String fileName;
-
 	private static File file = null;
-
-	// public static Map<String, File> fileType = new HashMap<String, File>();
-	/*
-	 * https://howtodoinjava.com/java/collections/hashmap/synchronize-hashmap/
-	 * #:~:text=Java%20HashMap%20is%20not%20synchronized,
-	 * hashmap%20and%20ConcurrentHashMap%20in%20Java
-	 */
 	private static ConcurrentHashMap<String, File> fileType = new ConcurrentHashMap<String, File>();
 
 	public FileManagerDao() {
@@ -50,9 +45,9 @@ public class FileManagerDao extends Thread {
 
 		if (fileType.size() < twoDataFiles) {
 			if (fileName.contains(".txt")) {
-				fileType.put("txt", file);
+				fileType.put(Constants.HASH_TXT, file);
 			} else if (fileName.contains(".json")) {
-				fileType.put("json", file);
+				fileType.put(Constants.HASH_JSON, file);
 			}
 		}
 
@@ -84,9 +79,9 @@ public class FileManagerDao extends Thread {
 
 		if (fileType.size() < twoDataFiles) {
 			if (fileName.contains(".txt")) {
-				fileType.put("txt", file);
+				fileType.put(Constants.HASH_TXT, file);
 			} else if (fileName.contains(".json")) {
-				fileType.put("json", file);
+				fileType.put(Constants.HASH_JSON, file);
 			}
 		}
 	}

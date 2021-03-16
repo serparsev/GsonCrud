@@ -9,13 +9,16 @@ import com.netmind.business.StudentBlImpl;
 import com.netmind.business.contracts.StudentBl;
 import com.netmind.common.model.EnumStudent;
 import com.netmind.common.model.Student;
+import com.netmind.dao.StudentDaoImpl;
+import com.netmind.dao.contracts.StudentDao;
 
 public class StudentConsole {
 
 	@SuppressWarnings("static-access")
 	public static void selectOperation() {
 		Scanner scanner = new Scanner(System.in);
-		StudentBl studentBl = new StudentBlImpl();
+		StudentDao studentDao = new StudentDaoImpl();
+		StudentBl studentBl = new StudentBlImpl(studentDao);
 		EnumStudent enumStudent = null;
 		int option;
 
