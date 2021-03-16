@@ -34,11 +34,11 @@ public class Config {
 		return prop.getProperty(Constants.TXT_FILE_NAME);
 	}
 
-	public static String getTextTxtFileName() {
-		return prop.getProperty(Constants.TEXT_TXT_FILE_NAME);
+	public static String getTextTxtFile() {
+		return prop.getProperty(Constants.TEXT_TXT_FILE);
 	}
 
-	public static String getTextJsonFileName() {
-		return prop.getProperty(Constants.TEXT_JSON_FILE_NAME);
+	public static String getTextJsonFile() {
+		return prop.getProperty(Constants.TEXT_JSON_FILE);
 	}
 }

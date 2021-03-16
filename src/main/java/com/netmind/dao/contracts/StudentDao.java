@@ -7,15 +7,20 @@ import java.util.UUID;
 import com.netmind.common.model.Student;
 
 public interface StudentDao {
-	boolean add(Student student) throws IOException;
+
+	boolean addToTxtFile(Student student) throws IOException;
 
 	boolean addToJsonFile(Student student) throws IOException;
 
-	boolean addStudentToFile(Student student) throws IOException;
+	List<Student> getAllFromTxt();
 
 	List<Student> getAllFromJson();
 
+	boolean updateTxtFile(UUID uuid, Student updatedStudent) throws IOException;
+
 	boolean updateJsonFile(UUID uuid, Student updatedStudent);
+
+	boolean removeFromTxtFile(UUID uuid) throws IOException;
 
 	boolean removeFromJsonFile(UUID uuid);
 }
