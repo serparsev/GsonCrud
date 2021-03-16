@@ -37,7 +37,7 @@ public class StudentDaoImplUnitTest {
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 
-		Student student = new Student();
+		student = new Student();
 		student.setIdStudent(1);
 		student.setName("test1");
 		student.setSurname("ferrer");
@@ -48,7 +48,7 @@ public class StudentDaoImplUnitTest {
 
 		UUID uuid = student.getUUId();
 
-		Student student1 = new Student();
+		student1 = new Student();
 		student1.setIdStudent(1);
 		student1.setName("test1");
 		student1.setSurname("ferrer");
@@ -69,20 +69,8 @@ public class StudentDaoImplUnitTest {
 
 	@Test
 	public void testAddToJsonFile() throws IOException {
-		Student student = new Student();
-		student.setIdStudent(1);
-		student.setName("Added");
-		student.setSurname("User");
-		student.setAge(20);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-		LocalDate dateOfBirth = LocalDate.parse("21-02-1999", formatter);
-		student.setDateOfBirth(dateOfBirth);
-
-		studentList.add(student);
-
-		verify(studentDao, never()).addToJsonFile(student);
-
-		assertTrue("No se ha insertado el estudiante", studentList.size() > 2);
+		assertTrue("No se ha insertado el estudiante",
+				studentDao.addToJsonFile(student) == true);
 	}
 
 	@Test
@@ -98,25 +86,9 @@ public class StudentDaoImplUnitTest {
 
 	@Test
 	public void testUpdateJsonFile() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
 		UUID uuid = student.getUUId();
-
-		student.setIdStudent(1);
-		student.setName("Updated");
-		student.setSurname("User");
-		student.setAge(20);
-		LocalDate dateOfBirth = LocalDate.parse("21-02-1999", formatter);
-		student.setDateOfBirth(dateOfBirth);
-
-		Student student = studentList.stream()
-				.filter(studentObj -> studentObj.getUUId().equals(uuid))
-				.findFirst().orElse(null);
-
-		verify(studentDao, never()).updateJsonFile(uuid, student);
-
 		assertTrue("El estudiante no se ha encontrado",
-				student.getName().equals("Updated"));
+				studentDao.updateJsonFile(uuid, student) == true);
 	}
 
 	@Test
@@ -126,11 +98,7 @@ public class StudentDaoImplUnitTest {
 
 		studentList.remove(student1);
 
-		verify(studentDao, never()).removeFromJsonFile(uuid);
-
-		Student removedStudent = studentList.stream()
-				.filter(s -> s.getUUId().equals(uuid)).findFirst().orElse(null);
-
-		assertTrue("El estudiante no se ha encontrado", removedStudent == null);
+		assertTrue("El estudiante no se ha encontrado",
+				studentDao.removeFromJsonFile(uuid) == true);
 	}
 }
