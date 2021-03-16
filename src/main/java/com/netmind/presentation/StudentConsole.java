@@ -35,7 +35,6 @@ public class StudentConsole {
 				addNewStudent(student, scanner);
 				try {
 					studentBl.add(student);
-					studentBl.addToJsonFile(student);
 				} catch (IOException e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();

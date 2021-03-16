@@ -20,7 +20,6 @@ public class StudentBlImpl implements StudentBl {
 	// inyectable y mockable
 	public StudentBlImpl(StudentDao studentDao) {
 		this.studentDao = studentDao;
-
 	}
 
 	@Override
@@ -44,17 +43,12 @@ public class StudentBlImpl implements StudentBl {
 		logger.info(Config.getTextTxtFile());
 		logger.info(Config.getJsonFileName());
 
-		return studentDao.addToTxtFile(student);
+		return (studentDao.addToTxtFile(student)
+				&& studentDao.addToJsonFile(student));
 	}
 
 	private int calculateAge(LocalDate dateOfBirth) {
 		Period edad = Period.between(dateOfBirth, LocalDate.now());
 		return edad.getYears();
 	}
-
-	@Override
-	public boolean addToJsonFile(Student student) throws IOException {
-		return studentDao.addToJsonFile(student);
-	}
-
 }
