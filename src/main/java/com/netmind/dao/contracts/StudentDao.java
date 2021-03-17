@@ -8,19 +8,11 @@ import com.netmind.common.model.Student;
 
 public interface StudentDao {
 
-	boolean addToTxtFile(Student student) throws IOException;
+	boolean addToFile(Student student) throws IOException;
 
-	boolean addToJsonFile(Student student) throws IOException;
+	List<Student> getFromFile();
 
-	List<Student> getAllFromTxt();
+	boolean updateFile(UUID uuid, Student updatedStudent);
 
-	List<Student> getAllFromJson();
-
-	boolean updateTxtFile(UUID uuid, Student updatedStudent) throws IOException;
-
-	boolean updateJsonFile(UUID uuid, Student updatedStudent);
-
-	boolean removeFromTxtFile(UUID uuid) throws IOException;
-
-	boolean removeFromJsonFile(UUID uuid);
+	boolean removeFromFile(UUID uuid);
 }
