@@ -20,9 +20,9 @@ import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 
 @RunWith(JUnitParamsRunner.class)
-public class StudentDaoImplIntegrationTest {
+public class StudentDaoImplJsonIntegrationTest {
 
-	static StudentDao studentDao = new StudentDaoImpl();
+	static StudentDao studentDaoJson = new StudentDaoImplJson();
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -49,8 +49,8 @@ public class StudentDaoImplIntegrationTest {
 		LocalDate dateOfBirth2 = LocalDate.parse("21-02-1999", formatter1);
 		student.setDateOfBirth(dateOfBirth2);
 
-		studentDao.addToJsonFile(student);
-		studentDao.addToJsonFile(student1);
+		studentDaoJson.addToFile(student);
+		studentDaoJson.addToFile(student1);
 	}
 
 	@AfterClass
@@ -67,77 +67,7 @@ public class StudentDaoImplIntegrationTest {
 	@Parameters({ "3, pepe, soto, 21, 26-02-2000",
 			"4, Mar, Biel, 21, 26-02-2000",
 			"5, Juan, Fernando, 21, 26-02-2000" })
-	public void testAddToJsonFile(Integer idStudent, String name,
-			String surname, Integer age, String date) throws IOException {
-
-		Student student = new Student();
-		student.setIdStudent(idStudent);
-		student.setName(name);
-		student.setSurname(surname);
-		student.setAge(age);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-		LocalDate dateOfBirth = LocalDate.parse(date, formatter);
-		student.setDateOfBirth(dateOfBirth);
-
-		assertTrue(studentDao.addToJsonFile(student) == true);
-	}
-
-	@Test
-	public void testGetAllFromJson() throws IOException {
-		assertTrue(studentDao.getAllFromJson().size() > 0);
-	}
-
-	@Test
-	public void testUpdateJsonFile() throws IOException {
-		DateTimeFormatter formatter1 = DateTimeFormatter
-				.ofPattern("dd-MM-yyyy");
-
-		Student oldStudent = new Student();
-		oldStudent.setIdStudent(45);
-		oldStudent.setName("oldStudent");
-		oldStudent.setSurname("diaz");
-		oldStudent.setAge(20);
-		LocalDate dateOfBirth = LocalDate.parse("21-02-1999", formatter1);
-		oldStudent.setDateOfBirth(dateOfBirth);
-
-		UUID uuid = oldStudent.getUUId();
-		studentDao.addToJsonFile(oldStudent);
-
-		Student updatedStudent = new Student();
-		updatedStudent.setIdStudent(45);
-		updatedStudent.setName("UpdatedStudent");
-		updatedStudent.setSurname("updated");
-		updatedStudent.setAge(20);
-		LocalDate dateOfBirth2 = LocalDate.parse("21-02-1999", formatter1);
-		updatedStudent.setDateOfBirth(dateOfBirth2);
-
-		assertTrue(studentDao.updateJsonFile(uuid, updatedStudent) == true);
-	}
-
-	@Test
-	public void testRemoveJsonFile() throws IOException {
-		DateTimeFormatter formatter1 = DateTimeFormatter
-				.ofPattern("dd-MM-yyyy");
-
-		Student removeStudent = new Student();
-		removeStudent.setIdStudent(45);
-		removeStudent.setName("removeStudent");
-		removeStudent.setSurname("diaz");
-		removeStudent.setAge(20);
-		LocalDate dateOfBirth = LocalDate.parse("21-02-1999", formatter1);
-		removeStudent.setDateOfBirth(dateOfBirth);
-
-		UUID uuid = removeStudent.getUUId();
-		studentDao.addToJsonFile(removeStudent);
-
-		assertTrue(studentDao.removeFromJsonFile(uuid) == true);
-	}
-
-	@Test
-	@Parameters({ "3, pepe, soto, 21, 26-02-2000",
-			"4, Mar, Biel, 21, 26-02-2000",
-			"5, Juan, Fernando, 21, 26-02-2000" })
-	public void testAddToTxtFile(Integer idStudent, String name, String surname,
+	public void testAddToFile(Integer idStudent, String name, String surname,
 			Integer age, String date) throws IOException {
 
 		Student student = new Student();
@@ -149,16 +79,16 @@ public class StudentDaoImplIntegrationTest {
 		LocalDate dateOfBirth = LocalDate.parse(date, formatter);
 		student.setDateOfBirth(dateOfBirth);
 
-		assertTrue(studentDao.addToTxtFile(student) == true);
+		assertTrue(studentDaoJson.addToFile(student) == true);
 	}
 
 	@Test
-	public void testGetAllFromTxt() throws IOException {
-		assertTrue(studentDao.getAllFromTxt().size() > 0);
+	public void testGetFromFile() throws IOException {
+		assertTrue(studentDaoJson.getFromFile().size() > 0);
 	}
 
 	@Test
-	public void testUpdateTxtFile() throws IOException {
+	public void testUpdateFile() throws IOException {
 		DateTimeFormatter formatter1 = DateTimeFormatter
 				.ofPattern("dd-MM-yyyy");
 
@@ -171,7 +101,7 @@ public class StudentDaoImplIntegrationTest {
 		oldStudent.setDateOfBirth(dateOfBirth);
 
 		UUID uuid = oldStudent.getUUId();
-		studentDao.addToTxtFile(oldStudent);
+		studentDaoJson.addToFile(oldStudent);
 
 		Student updatedStudent = new Student();
 		updatedStudent.setIdStudent(45);
@@ -181,11 +111,11 @@ public class StudentDaoImplIntegrationTest {
 		LocalDate dateOfBirth2 = LocalDate.parse("21-02-1999", formatter1);
 		updatedStudent.setDateOfBirth(dateOfBirth2);
 
-		assertTrue(studentDao.updateTxtFile(uuid, updatedStudent) == true);
+		assertTrue(studentDaoJson.updateFile(uuid, updatedStudent) == true);
 	}
 
 	@Test
-	public void testRemoveTxtFile() throws IOException {
+	public void testRemoveFromFile() throws IOException {
 		DateTimeFormatter formatter1 = DateTimeFormatter
 				.ofPattern("dd-MM-yyyy");
 
@@ -198,9 +128,8 @@ public class StudentDaoImplIntegrationTest {
 		removeStudent.setDateOfBirth(dateOfBirth);
 
 		UUID uuid = removeStudent.getUUId();
-		studentDao.addToTxtFile(removeStudent);
+		studentDaoJson.addToFile(removeStudent);
 
-		assertTrue(studentDao.removeFromTxtFile(uuid) == true);
+		assertTrue(studentDaoJson.removeFromFile(uuid) == true);
 	}
-
 }

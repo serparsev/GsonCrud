@@ -61,7 +61,7 @@ public class StudentDaoImplUnitTest {
 		studentList.add(student);
 		studentList.add(student1);
 
-		when(studentDao.addToJsonFile(student)).thenReturn(true);
+		when(studentDao.addToFile(student)).thenReturn(true);
 		when(studentDao.getAllFromJson()).thenReturn(studentList);
 		when(studentDao.updateJsonFile(uuid, student)).thenReturn(true);
 		when(studentDao.removeFromJsonFile(uuid1)).thenReturn(true);
@@ -70,15 +70,15 @@ public class StudentDaoImplUnitTest {
 	@Test
 	public void testAddToJsonFile() throws IOException {
 		assertTrue("No se ha insertado el estudiante",
-				studentDao.addToJsonFile(student) == true);
+				studentDao.addToFile(student) == true);
 	}
 
 	@Test
 	public void testGetAllFromJson() throws IOException {
 		List<Student> studentList = studentDao.getAllFromJson();
 
-		verify(studentDao, never()).addToJsonFile(student);
-		verify(studentDao, never()).addToJsonFile(student1);
+		verify(studentDao, never()).addToFile(student);
+		verify(studentDao, never()).addToFile(student1);
 
 		assertTrue("El tamaño de la lista es diferente que 2",
 				studentList.size() == 2);
@@ -93,11 +93,7 @@ public class StudentDaoImplUnitTest {
 
 	@Test
 	public void testRemoveJsonFile() {
-		List<Student> studentList = studentDao.getAllFromJson();
 		UUID uuid = student1.getUUId();
-
-		studentList.remove(student1);
-
 		assertTrue("El estudiante no se ha encontrado",
 				studentDao.removeFromJsonFile(uuid) == true);
 	}

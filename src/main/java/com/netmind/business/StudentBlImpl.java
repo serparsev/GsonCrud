@@ -43,8 +43,7 @@ public class StudentBlImpl implements StudentBl {
 		logger.info(Config.getTextTxtFile());
 		logger.info(Config.getJsonFileName());
 
-		return (studentDao.addToTxtFile(student)
-				&& studentDao.addToJsonFile(student));
+		return studentDao.addToFile(student);
 	}
 
 	private int calculateAge(LocalDate dateOfBirth) {
