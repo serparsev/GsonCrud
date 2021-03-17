@@ -62,9 +62,9 @@ public class StudentDaoImplUnitTest {
 		studentList.add(student1);
 
 		when(studentDao.addToFile(student)).thenReturn(true);
-		when(studentDao.getAllFromJson()).thenReturn(studentList);
-		when(studentDao.updateJsonFile(uuid, student)).thenReturn(true);
-		when(studentDao.removeFromJsonFile(uuid1)).thenReturn(true);
+		when(studentDao.getFromFile()).thenReturn(studentList);
+		when(studentDao.updateFile(uuid, student)).thenReturn(true);
+		when(studentDao.removeFromFile(uuid1)).thenReturn(true);
 	}
 
 	@Test
@@ -75,7 +75,7 @@ public class StudentDaoImplUnitTest {
 
 	@Test
 	public void testGetAllFromJson() throws IOException {
-		List<Student> studentList = studentDao.getAllFromJson();
+		List<Student> studentList = studentDao.getFromFile();
 
 		verify(studentDao, never()).addToFile(student);
 		verify(studentDao, never()).addToFile(student1);
@@ -88,13 +88,13 @@ public class StudentDaoImplUnitTest {
 	public void testUpdateJsonFile() {
 		UUID uuid = student.getUUId();
 		assertTrue("El estudiante no se ha encontrado",
-				studentDao.updateJsonFile(uuid, student) == true);
+				studentDao.updateFile(uuid, student) == true);
 	}
 
 	@Test
 	public void testRemoveJsonFile() {
 		UUID uuid = student1.getUUId();
 		assertTrue("El estudiante no se ha encontrado",
-				studentDao.removeFromJsonFile(uuid) == true);
+				studentDao.removeFromFile(uuid) == true);
 	}
 }
